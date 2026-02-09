@@ -1,34 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Светлана Андреева | Системный маркетолог</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Светлана Андреева</title>
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106315042', 'ym');
-
-        ym(106315042, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+      (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) return; }
+        k = e.createElement(t); a = e.getElementsByTagName(t)[0]; k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+      })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106315042", "ym");
+      ym(106315042, "init", { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
     </script>
     <!-- /Yandex.Metrika counter -->
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-      html, body, #root { margin: 0; padding: 0; width: 100%; min-height: 100%; }
+      html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: #fff; }
+      iframe { border: 0; width: 100%; height: 100%; display: block; }
+      .lead-btn {
+        position: fixed; right: 20px; bottom: 20px; z-index: 1000; border: 0; border-radius: 9999px;
+        background: #111827; color: #fff; padding: 14px 18px; font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        cursor: pointer;
+      }
+      .backdrop {
+        position: fixed; inset: 0; background: rgba(0, 0, 0, 0.45); display: none; align-items: center; justify-content: center; z-index: 1001;
+      }
+      .modal {
+        width: min(92vw, 420px); background: #fff; border-radius: 14px; padding: 18px;
+        font: 400 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      .modal h3 { margin: 0 0 12px; font-size: 18px; }
+      .modal input, .modal textarea {
+        width: 100%; box-sizing: border-box; margin: 8px 0; padding: 10px; border: 1px solid #d1d5db; border-radius: 10px;
+      }
+      .modal .row { display: flex; gap: 8px; margin-top: 8px; }
+      .modal button { flex: 1; border: 0; border-radius: 10px; padding: 10px; cursor: pointer; }
+      .primary { background: #111827; color: #fff; }
+      .secondary { background: #e5e7eb; color: #111827; }
+      .status { margin-top: 8px; font-size: 13px; }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <noscript><div><img src="https://mc.yandex.ru/watch/106315042" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-</body>
+    <iframe src="https://potato-hash-94726867.figma.site/" title="Сайт Светланы Андреевой"></iframe>
+
+    <button class="lead-btn" id="openLead">Оставить заявку</button>
+    <div class="backdrop" id="leadBackdrop">
+      <div class="modal">
+        <h3>Оставить заявку</h3>
+        <input id="leadName" placeholder="Ваше имя" />
+        <input id="leadContact" placeholder="Telegram / WhatsApp / Телефон" />
+        <textarea id="leadComment" rows="3" placeholder="Комментарий (необязательно)"></textarea>
+        <div class="row">
+          <button class="secondary" id="closeLead" type="button">Отмена</button>
+          <button class="primary" id="sendLead" type="button">Отправить</button>
+        </div>
+        <div class="status" id="leadStatus"></div>
+      </div>
+    </div>
+
+    <script>
+      const openBtn = document.getElementById("openLead");
+      const closeBtn = document.getElementById("closeLead");
+      const sendBtn = document.getElementById("sendLead");
+      const backdrop = document.getElementById("leadBackdrop");
+      const statusEl = document.getElementById("leadStatus");
+
+      const setOpen = (open) => {
+        backdrop.style.display = open ? "flex" : "none";
+        statusEl.textContent = "";
+      };
+
+      openBtn.addEventListener("click", () => {
+        setOpen(true);
+        if (typeof window.ym === "function") window.ym(106315042, "reachGoal", "lead_popup_open");
+      });
+      closeBtn.addEventListener("click", () => setOpen(false));
+      backdrop.addEventListener("click", (e) => { if (e.target === backdrop) setOpen(false); });
+
+      sendBtn.addEventListener("click", async () => {
+        const name = document.getElementById("leadName").value.trim();
+        const contact = document.getElementById("leadContact").value.trim();
+        const comment = document.getElementById("leadComment").value.trim();
+        if (!name || !contact) {
+          statusEl.textContent = "Заполните имя и контакт.";
+          return;
+        }
+        sendBtn.disabled = true;
+        statusEl.textContent = "Отправка...";
+        const message =
+`<b>🚀 НОВАЯ ЗАЯВКА С САЙТА (FIGMA)</b>
+
+<b>👤 Имя:</b> ${name}
+<b>📱 Контакт:</b> <code>${contact}</code>
+<b>💬 Комментарий:</b> ${comment || "Не указан"}
+<b>🌐 Страница:</b> ${location.href}`;
+        try {
+          const res = await fetch("/api/telegram", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message }),
+          });
+          if (!res.ok) throw new Error("send failed");
+          statusEl.textContent = "Готово. Заявка отправлена.";
+          if (typeof window.ym === "function") window.ym(106315042, "reachGoal", "lead_form_submit");
+          setTimeout(() => setOpen(false), 800);
+        } catch (e) {
+          statusEl.textContent = "Не удалось отправить. Попробуйте еще раз.";
+        } finally {
+          sendBtn.disabled = false;
+        }
+      });
+    </script>
+  </body>
 </html>
