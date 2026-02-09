@@ -29,7 +29,11 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: telegramJson?.description || "Telegram API failed" });
     }
 
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({
+      ok: true,
+      message_id: telegramJson?.result?.message_id || null,
+      chat_id: telegramJson?.result?.chat?.id || null,
+    });
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }

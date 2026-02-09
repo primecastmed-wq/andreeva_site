@@ -25,6 +25,11 @@
         background: #111827; color: #fff; padding: 14px 18px; font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         cursor: pointer;
       }
+      .lead-top {
+        position: fixed; left: 50%; top: 14px; transform: translateX(-50%); z-index: 1000; border: 0; border-radius: 9999px;
+        background: #111827; color: #fff; padding: 11px 16px; font: 600 13px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        cursor: pointer; box-shadow: 0 10px 24px rgba(0,0,0,.2);
+      }
       .backdrop {
         position: fixed; inset: 0; background: rgba(0, 0, 0, 0.45); display: none; align-items: center; justify-content: center; z-index: 1001;
       }
@@ -47,6 +52,7 @@
     <noscript><div><img src="https://mc.yandex.ru/watch/106315042" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <iframe src="https://potato-hash-94726867.figma.site/" title="Сайт Светланы Андреевой"></iframe>
 
+    <button class="lead-top" id="openLeadTop">Оставить заявку в Telegram</button>
     <button class="lead-btn" id="openLead">Оставить заявку</button>
     <div class="backdrop" id="leadBackdrop">
       <div class="modal">
@@ -65,6 +71,7 @@
     <script>
       const openBtn = document.getElementById("openLead");
       const closeBtn = document.getElementById("closeLead");
+      const openTopBtn = document.getElementById("openLeadTop");
       const sendBtn = document.getElementById("sendLead");
       const backdrop = document.getElementById("leadBackdrop");
       const statusEl = document.getElementById("leadStatus");
@@ -75,6 +82,10 @@
       };
 
       openBtn.addEventListener("click", () => {
+        setOpen(true);
+        if (typeof window.ym === "function") window.ym(106315042, "reachGoal", "lead_popup_open");
+      });
+      openTopBtn.addEventListener("click", () => {
         setOpen(true);
         if (typeof window.ym === "function") window.ym(106315042, "reachGoal", "lead_popup_open");
       });
@@ -104,8 +115,11 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message }),
           });
-          if (!res.ok) throw new Error("send failed");
-          statusEl.textContent = "Готово. Заявка отправлена.";
+          const data = await res.json();
+          if (!res.ok || !data?.ok) throw new Error("send failed");
+          statusEl.textContent = data?.message_id
+            ? `Готово. Заявка отправлена (ID: ${data.message_id}).`
+            : "Готово. Заявка отправлена.";
           if (typeof window.ym === "function") window.ym(106315042, "reachGoal", "lead_form_submit");
           setTimeout(() => setOpen(false), 800);
         } catch (e) {
