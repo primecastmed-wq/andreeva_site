@@ -3,15 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Светлана Андреева | Маркетинговые аудиты</title>
+    <title>Светлана Андреева</title>
 
+    <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
       (function (m, e, t, r, i, k, a) {
-        m[i] =
-          m[i] ||
-          function () {
-            (m[i].a = m[i].a || []).push(arguments);
-          };
+        m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
         m[i].l = 1 * new Date();
         for (var j = 0; j < document.scripts.length; j++) {
           if (document.scripts[j].src === r) return;
@@ -21,197 +18,45 @@
         k.async = 1;
         k.src = r;
         a.parentNode.insertBefore(k, a);
-      })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106315042", "ym");
-      ym(106315042, "init", {
+      })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=106315042', 'ym');
+
+      ym(106315042, 'init', {
         ssr: true,
         webvisor: true,
         clickmap: true,
-        ecommerce: "dataLayer",
+        ecommerce: 'dataLayer',
         referrer: document.referrer,
         url: location.href,
         accurateTrackBounce: true,
-        trackLinks: true,
+        trackLinks: true
       });
     </script>
+    <!-- /Yandex.Metrika counter -->
 
     <style>
-      :root {
-        --bg: #f4f6fb;
-        --text: #1f2937;
-        --muted: #4b5563;
-        --brand: #2563eb;
-        --brand-2: #7c3aed;
-        --card: #ffffff;
-        --line: #e5e7eb;
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
       }
-      * { box-sizing: border-box; }
-      html, body { margin: 0; padding: 0; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--text); background: var(--bg); }
-      a { color: inherit; text-decoration: none; }
-      .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-      .header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-      .header-row { height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-      .brand { display: flex; align-items: center; gap: 12px; }
-      .logo { width: 42px; height: 42px; border-radius: 12px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight: 800; background: linear-gradient(135deg, var(--brand), var(--brand-2)); }
-      .brand-title { font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -0.02em; }
-      .brand-sub { color: var(--muted); font-weight: 600; font-size: 18px; margin-top: 3px; }
-      .nav { display: flex; align-items: center; gap: 26px; font-weight: 700; color: #334155; }
-      .btn { border: 0; border-radius: 12px; padding: 12px 18px; font-weight: 700; cursor: pointer; }
-      .btn-primary { background: var(--brand); color: #fff; }
-      .btn-secondary { background: #fff; border: 1px solid var(--line); color: var(--text); }
-      .hero { padding: 54px 0 42px; }
-      .pill { display: inline-block; background: #dbeafe; color: #1d4ed8; font-weight: 700; border-radius: 999px; padding: 10px 16px; margin-bottom: 26px; }
-      .hero h1 { margin: 0 0 20px; font-size: clamp(46px, 8vw, 92px); line-height: .95; letter-spacing: -0.04em; background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-      .hero p { margin: 0 0 14px; font-size: 32px; line-height: 1.2; color: #374151; max-width: 980px; }
-      .hero p.small { font-size: 26px; color: #4b5563; }
-      .cta-row { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
-      .bonus { margin-top: 22px; border-left: 4px solid #22c55e; background: #ecfdf5; color: #065f46; padding: 16px 18px; border-radius: 10px; font-weight: 700; font-size: 26px; }
-      .section { padding: 42px 0; }
-      .section h2 { margin: 0 0 18px; font-size: 50px; letter-spacing: -0.02em; }
-      .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-      .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
-      .card h3 { margin: 0 0 10px; font-size: 24px; }
-      .card p { margin: 0; color: #4b5563; font-size: 20px; line-height: 1.35; }
-      .about { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
-      .form { display: grid; gap: 10px; max-width: 560px; }
-      .input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 16px; }
-      .status { margin-top: 8px; font-size: 14px; color: #1d4ed8; font-weight: 600; min-height: 20px; }
-      @media (max-width: 980px) {
-        .nav { display: none; }
-        .cards { grid-template-columns: 1fr; }
-        .brand-title { font-size: 26px; }
-        .brand-sub { font-size: 14px; }
-        .hero p { font-size: 22px; }
-        .hero p.small, .bonus { font-size: 18px; }
-        .section h2 { font-size: 34px; }
+      iframe {
+        border: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
       }
     </style>
   </head>
   <body>
     <noscript><div><img src="https://mc.yandex.ru/watch/106315042" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-
-    <header class="header">
-      <div class="wrap header-row">
-        <div class="brand">
-          <div class="logo">MA</div>
-          <div>
-            <div class="brand-title">MarketVantage</div>
-            <div class="brand-sub">Аудиты с результатом</div>
-          </div>
-        </div>
-        <nav class="nav">
-          <a href="#services">Услуги</a>
-          <a href="#about">Обо мне</a>
-          <a href="#qualification">Квалификация</a>
-          <a href="#contact" class="btn btn-primary">Получить консультацию</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="wrap">
-      <section class="hero" id="hero">
-        <div class="pill">Средний рост продаж клиентов +67%</div>
-        <h1>Увеличьте продажи<br />на 30-200% за 3 месяца</h1>
-        <p><b>Маркетинговые аудиты под ключ</b> с конкретным планом действий и гарантией результата.</p>
-        <p class="small">Я найду проблемы в маркетинге и отделе продаж, дам план внедрения с расчетом ROI и помогу получить результат.</p>
-        <div class="cta-row">
-          <a href="#contact" class="btn btn-primary">Бесплатная консультация</a>
-          <a href="#cases" class="btn btn-secondary">Смотреть кейсы</a>
-        </div>
-        <div class="bonus">Бонус: Чек-лист из 27 точек роста для бизнеса в подарок при заказе аудита.</div>
-      </section>
-
-      <section class="section" id="services">
-        <h2>Услуги</h2>
-        <div class="cards">
-          <article class="card">
-            <h3>Маркетинговый аудит</h3>
-            <p>Анализ каналов, позиционирования, воронки, сайта и рекламных кампаний с планом улучшений.</p>
-          </article>
-          <article class="card">
-            <h3>Аудит отдела продаж</h3>
-            <p>Проверка воронки продаж, скриптов, CRM и качества обработки лидов.</p>
-          </article>
-          <article class="card">
-            <h3>Комплексный аудит</h3>
-            <p>Маркетинг + продажи + аналитика с пошаговым планом внедрения и приоритетами.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="cases">
-        <h2>Кейсы</h2>
-        <div class="cards">
-          <article class="card"><h3>eCommerce</h3><p>Снижение CPA на 42% и рост конверсии сайта за 2 месяца.</p></article>
-          <article class="card"><h3>B2B</h3><p>Рост доли квалифицированных лидов на 55% после перестройки воронки.</p></article>
-          <article class="card"><h3>Медицина</h3><p>Рост выручки на 38% за 3 месяца через корректировку оффера и скриптов.</p></article>
-        </div>
-      </section>
-
-      <section class="section" id="about">
-        <h2>Обо мне</h2>
-        <div class="about">
-          <p style="font-size:20px;line-height:1.45;margin:0;">Светлана Андреева. Практикующий маркетолог с MBA и опытом комплексных аудитов маркетинга и продаж для B2B/B2C. Моя задача: не просто показать проблемы, а дать понятный план действий с прогнозируемым результатом.</p>
-        </div>
-      </section>
-
-      <section class="section" id="qualification">
-        <h2>Квалификация</h2>
-        <div class="cards">
-          <article class="card"><h3>Grenoble Ecole de Management</h3><p>MBA. Global Management.</p></article>
-          <article class="card"><h3>Skolkovo Foundation</h3><p>Опыт упаковки стартапов и привлечения инвестиций.</p></article>
-          <article class="card"><h3>Roistat Certified</h3><p>Сквозная аналитика и управление маркетингом на основе данных.</p></article>
-        </div>
-      </section>
-
-      <section class="section" id="contact">
-        <h2>Оставить заявку</h2>
-        <form class="form" id="leadForm">
-          <input class="input" id="name" required placeholder="Ваше имя" />
-          <input class="input" id="contactInput" required placeholder="Telegram / WhatsApp / Телефон" />
-          <textarea class="input" id="comment" rows="4" placeholder="Комментарий (необязательно)"></textarea>
-          <button class="btn btn-primary" type="submit">Отправить заявку</button>
-          <div class="status" id="status"></div>
-        </form>
-      </section>
-    </main>
-
-    <script>
-      document.querySelectorAll('a[href^="#"]').forEach((a) => {
-        a.addEventListener("click", (e) => {
-          const id = a.getAttribute("href");
-          const el = document.querySelector(id);
-          if (!el) return;
-          e.preventDefault();
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      });
-
-      const form = document.getElementById("leadForm");
-      const statusEl = document.getElementById("status");
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const name = document.getElementById("name").value.trim();
-        const contact = document.getElementById("contactInput").value.trim();
-        const comment = document.getElementById("comment").value.trim();
-        if (!name || !contact) return;
-
-        statusEl.textContent = "Отправка...";
-        const message = `<b>🚀 НОВАЯ ЗАЯВКА С САЙТА</b>\n\n<b>👤 Имя:</b> ${name}\n<b>📱 Контакт:</b> <code>${contact}</code>\n<b>💬 Комментарий:</b> ${comment || "Не указан"}\n<b>🌐 Страница:</b> ${location.href}`;
-        try {
-          const res = await fetch("/api/telegram", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message })
-          });
-          const data = await res.json();
-          if (!res.ok || !data?.ok) throw new Error("send failed");
-          statusEl.textContent = data?.message_id ? `Заявка отправлена (ID: ${data.message_id}).` : "Заявка отправлена.";
-          form.reset();
-          if (typeof window.ym === "function") window.ym(106315042, "reachGoal", "lead_form_submit");
-        } catch (err) {
-          statusEl.textContent = "Ошибка отправки. Попробуйте еще раз.";
-        }
-      });
-    </script>
+    <iframe
+      src="https://potato-hash-94726867.figma.site/"
+      title="Сайт Светланы Андреевой"
+      loading="eager"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="clipboard-read; clipboard-write"
+    ></iframe>
   </body>
 </html>
