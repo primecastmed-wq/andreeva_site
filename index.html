@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Светлана Андреева | Системный маркетолог</title>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106315042', 'ym');
+
+        ym(106315042, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106315042" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .neon-border-glow {
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.1), inset 0 0 10px rgba(99, 102, 241, 0.05);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .niche-text {
+            letter-spacing: 0.3em;
+            font-style: italic;
+        }
+        @keyframes border-pulse {
+            0%, 100% { border-color: rgba(99, 102, 241, 0.2); box-shadow: 0 0 10px rgba(99, 102, 241, 0.05); }
+            50% { border-color: rgba(99, 102, 241, 0.5); box-shadow: 0 0 25px rgba(99, 102, 241, 0.15); }
+        }
+        .animate-border-pulse {
+            animation: border-pulse 2s infinite ease-in-out;
+        }
+        section { scroll-margin-top: 80px; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="antialiased selection:bg-indigo-500/10">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

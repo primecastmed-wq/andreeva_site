@@ -1,0 +1,99 @@
+
+/**
+ * Сервис для отправки уведомлений в Telegram.
+ */
+
+const TELEGRAM_BOT_TOKEN = '8177451986:AAHbx2SCySkEBX77pG9LijcSi1GQi6H2Oqw'; 
+const TELEGRAM_CHAT_ID = '854248885'; 
+
+/**
+ * Экранирует спецсимволы HTML, чтобы не ломать parse_mode: 'HTML' в Telegram.
+ * Telegram очень чувствителен к незакрытым тегам и символам < > &.
+ */
+const escapeHTML = (text: string): string => {
+  if (!text) return '';
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+};
+
+export const sendTelegramNotification = async (message: string) => {
+  // Fix: Explicitly cast to string to avoid literal comparison error in newer TypeScript versions
+  const isConfigured = TELEGRAM_CHAT_ID && (TELEGRAM_CHAT_ID as string) !== 'ВАШ_CHAT_ID';
+  
+  if (!isConfigured) {
+    console.warn('Telegram Chat ID не настроен.');
+    return;
+  }
+
+  const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+  
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: message,
+        parse_mode: 'HTML',
+      }),
+    });
+
+    const result = await response.json();
+    if (!response.ok) {
+      console.error('Telegram API Error Response:', result);
+      throw new Error(`Telegram API Error: ${result.description}`);
+    }
+    console.log('Уведомление в Telegram успешно отправлено');
+  } catch (error) {
+    console.error('Ошибка при отправке в Telegram:', error);
+    throw error;
+  }
+};
+
+export const formatLeadMessage = (data: {
+  name: string;
+  company?: string;
+  method: string;
+  contact: string;
+}) => {
+  const name = escapeHTML(data.name);
+  const company = escapeHTML(data.company || 'Не указана');
+  const contact = escapeHTML(data.contact);
+  const methodLabel = data.method === 'direct' ? 'ПРЯМАЯ СВЯЗЬ' : data.method.toUpperCase();
+  
+  return `
+<b>🚀 НОВАЯ ЗАЯВКА С САЙТА</b>
+
+<b>👤 Имя:</b> ${name}
+<b>🏢 Компания:</b> ${company}
+<b>🛠 Способ связи:</b> ${methodLabel}
+<b>📱 Контакт:</b> <code>${contact}</code>
+
+_________________________
+<i>Отправлено из MarketVantage AI</i>
+  `.trim();
+};
+
+export const formatAuditLeadMessage = (businessInfo: string, summary: string, leadEmail: string) => {
+  const safeEmail = escapeHTML(leadEmail);
+  const safeInfo = escapeHTML(businessInfo.substring(0, 500));
+  const safeSummary = escapeHTML(summary);
+
+  return `
+<b>🤖 ИИ-АУДИТ ВЫПОЛНЕН (+ ЛИД)</b>
+
+<b>📧 Email клиента:</b> <code>${safeEmail}</code>
+
+<b>📝 Описание бизнеса:</b>
+<i>${safeInfo}${businessInfo.length > 500 ? '...' : ''}</i>
+
+<b>📊 Краткое резюме ИИ:</b>
+${safeSummary}
+
+⚠️ <i>Клиент заполнил форму email, чтобы увидеть этот результат.</i>
+  `.trim();
+};
