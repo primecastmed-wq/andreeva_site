@@ -32,9 +32,8 @@ export default async function handler(req, res) {
     return res.status(200).json({
       ok: true,
       message_id: telegramJson?.result?.message_id || null,
-      chat_id: telegramJson?.result?.chat?.id || null,
     });
-  } catch (error) {
+  } catch {
     return res.status(500).json({ error: "Internal server error" });
   }
 }

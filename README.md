@@ -1,20 +1,11 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
 
-# Run and deploy your AI Studio app
+  # Визуальная реформа сайта
 
-This contains everything you need to run your app locally.
+  This is a code bundle for Визуальная реформа сайта. The original project is available at https://www.figma.com/design/SZTD0othFmP8YiHwRP1HfI/%D0%92%D0%B8%D0%B7%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D1%84%D0%BE%D1%80%D0%BC%D0%B0-%D1%81%D0%B0%D0%B9%D1%82%D0%B0.
 
-View your app in AI Studio: https://ai.studio/apps/drive/14X7nFc_GHTPJD_gezRqpuaTCst8Xj3ke
+  ## Running the code
 
-## Run Locally
+  Run `npm i` to install the dependencies.
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+  Run `npm run dev` to start the development server.
+  
