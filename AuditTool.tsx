@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { performAiAudit } from '../services/geminiService';
-import { sendTelegramNotification, formatAuditLeadMessage } from '../services/notificationService';
-import { AuditResult } from '../types';
+import { performAiAudit } from './geminiService';
+import { sendTelegramNotification, formatAuditLeadMessage } from './notificationService';
+import { AuditResult } from './types';
 
 declare global {
   interface AIStudio {

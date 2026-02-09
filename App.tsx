@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import Navigation from './components/Navigation';
-import AuditTool from './components/AuditTool';
-import Cases from './components/Cases';
-import Testimonials from './components/Testimonials';
-import GrowthChart from './components/GrowthChart';
-import Pricing from './components/Pricing';
-import Features from './components/Features';
-import { sendTelegramNotification, formatLeadMessage } from './services/notificationService';
+import Navigation from './Navigation';
+import AuditTool from './AuditTool';
+import Cases from './Cases';
+import Testimonials from './Testimonials';
+import GrowthChart from './GrowthChart';
+import Pricing from './Pricing';
+import Features from './Features';
+import { sendTelegramNotification, formatLeadMessage } from './notificationService';
 
 const App: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', company: '', method: 'direct', contact: '' });

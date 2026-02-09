@@ -1,6 +1,6 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
-import { AuditResult } from "../types";
+import { AuditResult } from "./types";
 
 export const performAiAudit = async (businessInfo: string): Promise<AuditResult> => {
   const apiKey = process.env.API_KEY;
