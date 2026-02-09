@@ -3,9 +3,6 @@
  * Сервис для отправки уведомлений в Telegram.
  */
 
-const TELEGRAM_BOT_TOKEN = '8177451986:AAHbx2SCySkEBX77pG9LijcSi1GQi6H2Oqw'; 
-const TELEGRAM_CHAT_ID = '854248885'; 
-
 /**
  * Экранирует спецсимволы HTML, чтобы не ломать parse_mode: 'HTML' в Telegram.
  * Telegram очень чувствителен к незакрытым тегам и символам < > &.
@@ -19,26 +16,14 @@ const escapeHTML = (text: string): string => {
 };
 
 export const sendTelegramNotification = async (message: string) => {
-  // Fix: Explicitly cast to string to avoid literal comparison error in newer TypeScript versions
-  const isConfigured = TELEGRAM_CHAT_ID && (TELEGRAM_CHAT_ID as string) !== 'ВАШ_CHAT_ID';
-  
-  if (!isConfigured) {
-    console.warn('Telegram Chat ID не настроен.');
-    return;
-  }
-
-  const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-  
   try {
-    const response = await fetch(url, {
+    const response = await fetch('/api/telegram', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        chat_id: TELEGRAM_CHAT_ID,
-        text: message,
-        parse_mode: 'HTML',
+        message,
       }),
     });
 

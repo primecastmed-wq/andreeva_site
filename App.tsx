@@ -69,12 +69,6 @@ const App: React.FC = () => {
                 <span className="gradient-text italic">Маркетинг</span>
               </h1>
               
-              <div className="absolute top-0 -right-4 md:-right-36 md:top-8 z-20">
-                <div className="bg-indigo-600 text-white px-4 py-2 md:px-7 md:py-3 rounded-2xl shadow-2xl rotate-12 flex flex-col items-center border-4 border-white transition-transform hover:scale-110 duration-300">
-                  <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest leading-none">Status</span>
-                  <span className="text-xl md:text-2xl font-black italic tracking-tighter">MBA</span>
-                </div>
-              </div>
             </div>
             
             <p className="text-slate-600 text-xl md:text-3xl font-bold max-w-4xl mx-auto mb-12 leading-[1.2] uppercase opacity-90 animate-fade-up">
