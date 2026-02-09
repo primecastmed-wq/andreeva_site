@@ -3,192 +3,60 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <title>Светлана Андреева | Системный маркетолог</title>
+    <title>Светлана Андреева</title>
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
       (function (m, e, t, r, i, k, a) {
-        m[i] =
-          m[i] ||
-          function () {
-            (m[i].a = m[i].a || []).push(arguments);
-          };
+        m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
         m[i].l = 1 * new Date();
         for (var j = 0; j < document.scripts.length; j++) {
-          if (document.scripts[j].src === r) {
-            return;
-          }
+          if (document.scripts[j].src === r) return;
         }
         k = e.createElement(t);
         a = e.getElementsByTagName(t)[0];
         k.async = 1;
         k.src = r;
         a.parentNode.insertBefore(k, a);
-      })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=106315042", "ym");
+      })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=106315042', 'ym');
 
-      ym(106315042, "init", {
+      ym(106315042, 'init', {
         ssr: true,
         webvisor: true,
         clickmap: true,
-        ecommerce: "dataLayer",
+        ecommerce: 'dataLayer',
         referrer: document.referrer,
         url: location.href,
         accurateTrackBounce: true,
-        trackLinks: true,
+        trackLinks: true
       });
     </script>
     <!-- /Yandex.Metrika counter -->
 
-    <link
-      rel="preload"
-      href="https://potato-hash-94726867.figma.site/_runtimes/sites-runtime.77cc7626b489601a118982cb737731051cafab6d2a61c5f0a545ce9f4ef222aa.js"
-      as="script"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="https://potato-hash-94726867.figma.site/_components/v2/3a6c21d4f2308e0cfc3de5711e2f470a854819b3.js"
-      as="script"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="https://potato-hash-94726867.figma.site/_json/f5a51b07-00a8-4bfd-a011-f19225992977/_index.json"
-      as="fetch"
-      crossorigin
-    />
-    <link
-      rel="stylesheet"
-      href="https://potato-hash-94726867.figma.site/_components/v2/3a6c21d4f2308e0cfc3de5711e2f470a854819b3.css"
-      crossorigin
-    />
-
     <style>
-      html,
-      body,
-      #container {
+      html, body {
         margin: 0;
         padding: 0;
         width: 100%;
-        min-height: 100%;
+        height: 100%;
         background: #fff;
+      }
+      iframe {
+        border: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
       }
     </style>
   </head>
   <body>
-    <noscript>
-      <div>
-        <img src="https://mc.yandex.ru/watch/106315042" style="position: absolute; left: -9999px" alt="" />
-      </div>
-    </noscript>
-
-    <div id="container"></div>
-
-    <script data-template-id="country-code">
-      window.__cf_country = "RU";
-    </script>
-
-    <script type="module">
-      import { SitesRuntime } from "https://potato-hash-94726867.figma.site/_runtimes/sites-runtime.77cc7626b489601a118982cb737731051cafab6d2a61c5f0a545ce9f4ef222aa.js";
-
-      const sitesRuntime = new SitesRuntime({
-        container: document.getElementById("container"),
-        env: "published",
-        bundleId: "f5a51b07-00a8-4bfd-a011-f19225992977",
-        loadComponentsOverNetwork: true,
-        assetsVersion: "v11",
-        fontsVersion: "v1",
-        videosVersion: "v1",
-        codeComponentsVersion: "v2",
-        withBaseStyles: false,
-        reportingDomain: "https://www.figma.com",
-        bundleCreationDate: "2026-02-09 13:19:19 UTC",
-        isFigmake: true,
-        enableMetaTags: true,
-      });
-
-      const normalize = (str) =>
-        (str || "")
-          .toLowerCase()
-          .replace(/\s+/g, " ")
-          .trim();
-
-      const sectionSelectors = ["section", "article", "main", "[data-node-id]", "div"];
-
-      const findTextNode = (regex) => {
-        const nodes = document.querySelectorAll("h1, h2, h3, h4, p, span, div, button, a");
-        for (const node of nodes) {
-          const text = normalize(node.textContent);
-          if (!text || text.length > 180) continue;
-          if (regex.test(text)) return node;
-        }
-        return null;
-      };
-
-      const ensureSectionId = (id, regex) => {
-        if (document.getElementById(id)) return true;
-        const textNode = findTextNode(regex);
-        if (!textNode) return false;
-
-        let target = null;
-        for (const selector of sectionSelectors) {
-          target = textNode.closest(selector);
-          if (target) break;
-        }
-        target = target || textNode;
-        if (!target.id) target.id = id;
-        return true;
-      };
-
-      const mapSections = () => {
-        ensureSectionId("services", /тарифы и услуги|услуги/i);
-        ensureSectionId("cases", /кейсы|что получили мои клиенты/i);
-        ensureSectionId("about", /светлана андреева|обо мне/i);
-        ensureSectionId("qualification", /квалификац|mba|дипломов mba/i);
-        ensureSectionId("contact", /получить консультацию|заказать аудит|бесплатная консультация/i);
-      };
-
-      const scrollToId = (id) => {
-        const el = document.getElementById(id);
-        if (!el) return false;
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        return true;
-      };
-
-      const buttonRouting = [
-        { regex: /\bуслуги\b/i, target: "services" },
-        { regex: /\bкейсы\b|смотреть кейсы/i, target: "cases" },
-        { regex: /обо мне/i, target: "about" },
-        { regex: /квалификац|mba/i, target: "qualification" },
-        { regex: /получить консультацию|бесплатная консультация|заказать аудит|обсудить проект|связаться/i, target: "contact" },
-      ];
-
-      const handleClick = (event) => {
-        const trigger = event.target.closest("a,button,[role='button']");
-        if (!trigger) return;
-
-        const text = normalize(trigger.textContent);
-        if (!text) return;
-
-        const route = buttonRouting.find((item) => item.regex.test(text));
-        if (!route) return;
-
-        mapSections();
-        const ok = scrollToId(route.target);
-        if (ok) {
-          event.preventDefault();
-          if (typeof window.ym === "function") {
-            window.ym(106315042, "reachGoal", "figma_nav_click");
-          }
-        }
-      };
-
-      const observer = new MutationObserver(() => mapSections());
-      observer.observe(document.body, { childList: true, subtree: true });
-
-      mapSections();
-      document.addEventListener("click", handleClick, true);
-    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106315042" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <iframe
+      src="https://potato-hash-94726867.figma.site/"
+      title="Сайт Светланы Андреевой"
+      loading="eager"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="clipboard-read; clipboard-write"
+    ></iframe>
   </body>
 </html>
