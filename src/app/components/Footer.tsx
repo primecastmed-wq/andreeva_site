@@ -13,7 +13,7 @@ export function Footer() {
                 <span className="text-white font-bold text-xl">МА</span>
               </div>
               <div>
-                <h3 className="font-bold text-lg">MarketVantage</h3>
+                <h3 className="font-bold text-lg">Антикризисный маркетинг</h3>
                 <p className="text-xs text-gray-400">Аудиты с результатом</p>
               </div>
             </div>
@@ -74,7 +74,7 @@ export function Footer() {
 
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-            <p>© {currentYear} MarketVantage. Все права защищены.</p>
+            <p>© {currentYear} Антикризисный маркетинг. Все права защищены.</p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-white transition-colors">
                 Политика конфиденциальности

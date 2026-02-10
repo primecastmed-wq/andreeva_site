@@ -74,7 +74,7 @@ export function Certifications() {
                       textShadow: "2px 2px 4px rgba(0,0,0,0.3)",
                     }}
                   >
-                    MarketVantage
+                    Антикризисный маркетинг
                   </div>
                 </div>
               </div>

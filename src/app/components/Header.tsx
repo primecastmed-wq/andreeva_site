@@ -22,7 +22,7 @@ export function Header() {
               <span className="text-white font-bold text-xl">МА</span>
             </div>
             <div>
-              <h1 className="font-bold text-lg">MarketVantage</h1>
+              <h1 className="font-bold text-lg">Антикризисный маркетинг</h1>
               <p className="text-xs text-gray-600">Аудиты с результатом</p>
             </div>
           </div>
