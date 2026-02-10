@@ -50,7 +50,7 @@ export function CTA() {
         typeof window !== "undefined" &&
         typeof (window as any).ym === "function"
       ) {
-        (window as any).ym(106315042, "reachGoal", "lead_form_submit");
+        (window as any).ym(106751172, "reachGoal", "lead_form_submit");
       }
     } catch {
       setStatus("Не удалось отправить заявку. Попробуйте еще раз.");
