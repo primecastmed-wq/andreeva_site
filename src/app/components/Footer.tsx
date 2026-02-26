@@ -48,11 +48,11 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Контакты</h4>
             <div className="space-y-3">
               <a
-                href="mailto:svetlana@marketvantage.ru"
+                href="mailto:Im@andreeva1.ru"
                 className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
               >
                 <Mail size={16} />
-                svetlana@marketvantage.ru
+                Im@andreeva1.ru
               </a>
               <a
                 href="#"
@@ -62,7 +62,9 @@ export function Footer() {
                 LinkedIn
               </a>
               <a
-                href="#"
+                href="https://t.me/AndreevaSvetlana_bot"
+                target="_blank"
+                rel="noreferrer"
                 className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
               >
                 <MessageCircle size={16} />

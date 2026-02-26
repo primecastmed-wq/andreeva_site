@@ -237,14 +237,22 @@ export function CTA() {
 
             <div className="mt-6 pt-6 border-t">
               <div className="flex items-center justify-center gap-8 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
+                <a
+                  href="https://t.me/AndreevaSvetlana_bot"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 hover:text-blue-600 transition-colors"
+                >
                   <MessageSquare size={16} className="text-blue-600" />
                   <span>Telegram</span>
-                </div>
-                <div className="flex items-center gap-2">
+                </a>
+                <a
+                  href="mailto:Im@andreeva1.ru"
+                  className="flex items-center gap-2 hover:text-blue-600 transition-colors"
+                >
                   <Mail size={16} className="text-blue-600" />
-                  <span>Email</span>
-                </div>
+                  <span>Im@andreeva1.ru</span>
+                </a>
                 <div className="flex items-center gap-2">
                   <Phone size={16} className="text-blue-600" />
                   <span>Звонок</span>
