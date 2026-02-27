@@ -31,11 +31,11 @@ export function Hero() {
               Я найду все проблемы в вашем маркетинге и отделе продаж, дам готовый план внедрения с расчетом ROI и помогу получить результат
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 sm:max-w-4xl">
               <Button
                 onClick={() => scrollToSection("cta")}
                 size="lg"
-                className="bg-orange-500 hover:bg-orange-600 text-lg px-8 py-7 font-semibold"
+                className="bg-orange-500 hover:bg-orange-600 text-lg px-8 py-7 font-semibold sm:flex-1 min-h-14"
               >
                 Записаться на бесплатную 30-мин консультацию
                 <ArrowRight className="ml-2" size={20} />
@@ -44,7 +44,7 @@ export function Hero() {
                 onClick={() => scrollToSection("checklist")}
                 size="lg"
                 variant="outline"
-                className="text-lg px-8"
+                className="text-lg px-8 py-7 font-semibold sm:flex-1 min-h-14"
               >
                 Получить чек-лист бесплатно
               </Button>
