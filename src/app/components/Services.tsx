@@ -14,7 +14,8 @@ export function Services() {
     {
       icon: <BarChart3 className="w-12 h-12 text-blue-600" />,
       title: "Маркетинговый аудит",
-      price: "от 150 000 ₽",
+      pricingHint:
+        "Стоимость рассчитывается индивидуально после бесплатной консультации — от 130 000 ₽ (в зависимости от объема и задач)",
       duration: "14-21 день",
       description: "Глубокий анализ всех маркетинговых каналов и стратегий",
       features: [
@@ -28,7 +29,8 @@ export function Services() {
     {
       icon: <Users className="w-12 h-12 text-purple-600" />,
       title: "Аудит отдела продаж",
-      price: "от 130 000 ₽",
+      pricingHint:
+        "Стоимость рассчитывается индивидуально после бесплатной консультации — от 130 000 ₽ (в зависимости от объема и задач)",
       duration: "10-14 дней",
       description: "Комплексная проверка процессов и эффективности продаж",
       features: [
@@ -43,7 +45,8 @@ export function Services() {
     {
       icon: <Target className="w-12 h-12 text-green-600" />,
       title: "Комплексный аудит под ключ",
-      price: "от 250 000 ₽",
+      pricingHint:
+        "Стоимость рассчитывается индивидуально после бесплатной консультации — от 130 000 ₽ (в зависимости от объема и задач)",
       duration: "21-30 дней",
       description: "Полная диагностика маркетинга и продаж с планом внедрения",
       features: [
@@ -62,9 +65,11 @@ export function Services() {
     <section id="services" className="py-20 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Тарифы и услуги</h2>
+          <h2 className="text-4xl font-bold mb-4">
+            Индивидуальные форматы аудита под ваш бизнес
+          </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Выберите подходящий формат аудита для вашего бизнеса
+            Точный формат и стоимость подбираю после бесплатной консультации
           </p>
         </div>
 
@@ -84,11 +89,9 @@ export function Services() {
               <div className="p-6">
                 <div className="mb-4">{service.icon}</div>
                 <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
-                <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-3xl font-bold text-blue-600">
-                    {service.price}
-                  </span>
-                </div>
+                <p className="text-base font-medium text-blue-700 mb-3">
+                  {service.pricingHint}
+                </p>
                 <div className="text-sm text-gray-600 mb-4">
                   Срок: {service.duration}
                 </div>
@@ -105,11 +108,11 @@ export function Services() {
                   onClick={() => scrollToSection("cta")}
                   className={`w-full ${
                     service.popular
-                      ? "bg-blue-600 hover:bg-blue-700"
+                      ? "bg-orange-500 hover:bg-orange-600"
                       : "bg-gray-900 hover:bg-gray-800"
                   }`}
                 >
-                  Заказать аудит
+                  Записаться на бесплатную консультацию
                 </Button>
               </div>
             </Card>

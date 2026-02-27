@@ -35,24 +35,27 @@ export function Hero() {
               <Button
                 onClick={() => scrollToSection("cta")}
                 size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-lg px-8"
+                className="bg-orange-500 hover:bg-orange-600 text-lg px-8 py-7 font-semibold"
               >
-                Бесплатная консультация
+                Записаться на бесплатную 30-мин консультацию
                 <ArrowRight className="ml-2" size={20} />
               </Button>
               <Button
-                onClick={() => scrollToSection("results")}
+                onClick={() => scrollToSection("checklist")}
                 size="lg"
                 variant="outline"
                 className="text-lg px-8"
               >
-                Смотреть кейсы
+                Получить чек-лист бесплатно
               </Button>
             </div>
+            <p className="text-sm text-gray-600 mt-3">
+              Без обязательств + чек-лист «27 точек роста» в подарок
+            </p>
 
             <div className="mt-8 p-4 bg-green-50 border-l-4 border-green-600 rounded">
               <p className="text-green-800 font-semibold">
-                🎁 Бонус: Чек-лист из 27 точек роста для вашего бизнеса — в подарок при заказе аудита
+                ⚡ Только в феврале: чек-лист «27 точек роста» бесплатно при записи на консультацию
               </p>
             </div>
 

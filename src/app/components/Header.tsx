@@ -49,9 +49,9 @@ export function Header() {
             </button>
             <Button
               onClick={() => scrollToSection("cta")}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-orange-500 hover:bg-orange-600"
             >
-              Получить консультацию
+              Бесплатная консультация
             </Button>
           </nav>
 
@@ -87,10 +87,18 @@ export function Header() {
             </button>
             <Button
               onClick={() => scrollToSection("cta")}
-              className="bg-blue-600 hover:bg-blue-700 w-full"
+              className="bg-orange-500 hover:bg-orange-600 w-full"
             >
-              Получить консультацию
+              Бесплатная консультация
             </Button>
+            <a
+              href="https://t.me/AndreevaSvetlana_bot"
+              target="_blank"
+              rel="noreferrer"
+              className="text-blue-600 text-sm font-medium"
+            >
+              Telegram
+            </a>
           </nav>
         )}
       </div>
