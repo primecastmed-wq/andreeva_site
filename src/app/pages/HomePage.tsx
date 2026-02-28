@@ -94,6 +94,15 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      typeof (window as any).ym === "function"
+    ) {
+      (window as any).ym(106751172, "hit", window.location.pathname + window.location.search);
+    }
+  }, []);
+
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMobileMenuOpen(false);

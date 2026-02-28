@@ -113,7 +113,7 @@ export function LeadForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="text-left space-y-4">
+    <form id="lead-form" onSubmit={handleSubmit} noValidate className="text-left space-y-4">
       {/* Selected plan badge */}
       <AnimatePresence>
         {plan && (
@@ -172,7 +172,10 @@ export function LeadForm({
           Ваше имя
         </label>
         <input
+          id="lead-name"
+          name="name"
           type="text"
+          autoComplete="name"
           placeholder="Например, Алексей"
           value={form.name}
           onChange={(e) => {
@@ -233,7 +236,10 @@ export function LeadForm({
               @
             </span>
             <input
+              id="lead-telegram"
+              name="telegram"
               type="text"
+              autoComplete="username"
               placeholder="username"
               value={form.contact.replace(/^@/, "")}
               onChange={(e) => {
@@ -247,7 +253,10 @@ export function LeadForm({
           </div>
         ) : (
           <input
+            id="lead-phone"
+            name="phone"
             type="tel"
+            autoComplete="tel"
             placeholder="+7 (999) 123-45-67"
             value={form.contact}
             onChange={(e) => {
@@ -294,6 +303,8 @@ export function LeadForm({
       {submitError && (
         <p className="text-center text-red-400 text-xs">{submitError}</p>
       )}
+
+      <input type="hidden" name="contact_type" value={contactType} />
 
       <p className="text-center text-slate-600 text-xs">
         Нажимая кнопку, вы соглашаетесь на обработку персональных данных

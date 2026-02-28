@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { motion } from "motion/react";
 import {
@@ -18,6 +18,15 @@ export default function ServicePage() {
   const [selectedPlan, setSelectedPlan] = useState<{ title: string; price: string; installment: string } | null>(null);
 
   const service = servicesData.find((s) => s.slug === slug);
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      typeof (window as any).ym === "function"
+    ) {
+      (window as any).ym(106751172, "hit", window.location.pathname + window.location.search);
+    }
+  }, [slug]);
 
   if (!service) {
     return (
