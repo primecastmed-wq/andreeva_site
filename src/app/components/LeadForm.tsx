@@ -18,6 +18,18 @@ export function LeadForm({
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [formStarted, setFormStarted] = useState(false);
+
+  const markFormStart = () => {
+    if (formStarted) return;
+    setFormStarted(true);
+    if (
+      typeof window !== "undefined" &&
+      typeof (window as any).ym === "function"
+    ) {
+      (window as any).ym(106751172, "reachGoal", "lead_form_start");
+    }
+  };
 
   const validate = () => {
     const e = { name: "", contact: "" };
@@ -44,11 +56,13 @@ export function LeadForm({
     const telegramMessage = `
 <b>🚀 НОВАЯ ЗАЯВКА С САЙТА</b>
 
+<b>🎯 Тип заявки:</b> Бесплатная консультация
 <b>👤 Имя:</b> ${form.name}
 <b>📲 Контакт:</b> <code>${normalizedContact}</code>
 <b>📌 Канал:</b> ${contactType === "tg" ? "Telegram" : "Телефон"}
 <b>🧾 Тариф:</b> ${plan ? plan.title : "Не выбран"}
 <b>💰 Цена:</b> ${plan ? plan.price : "Не указана"}
+<b>📍 Страница:</b> ${typeof window !== "undefined" ? window.location.href : "N/A"}
     `.trim();
 
     try {
@@ -113,7 +127,14 @@ export function LeadForm({
   }
 
   return (
-    <form id="lead-form" onSubmit={handleSubmit} noValidate className="text-left space-y-4">
+    <form
+      id="lead-form"
+      onSubmit={handleSubmit}
+      noValidate
+      method="post"
+      action="#"
+      className="text-left space-y-4"
+    >
       {/* Selected plan badge */}
       <AnimatePresence>
         {plan && (
@@ -182,6 +203,7 @@ export function LeadForm({
             setForm((f) => ({ ...f, name: e.target.value }));
             setErrors((er) => ({ ...er, name: "" }));
           }}
+          onFocus={markFormStart}
           className={`w-full bg-white/5 border ${
             errors.name ? "border-red-500/60" : "border-white/12"
           } rounded-xl px-4 py-3.5 text-white text-sm placeholder-slate-600 outline-none focus:border-violet-500/60 focus:bg-white/8 transition-all`}
@@ -246,6 +268,7 @@ export function LeadForm({
                 setForm((f) => ({ ...f, contact: e.target.value }));
                 setErrors((er) => ({ ...er, contact: "" }));
               }}
+              onFocus={markFormStart}
               className={`w-full bg-white/5 border ${
                 errors.contact ? "border-red-500/60" : "border-white/12"
               } rounded-xl pl-8 pr-4 py-3.5 text-white text-sm placeholder-slate-600 outline-none focus:border-violet-500/60 focus:bg-white/8 transition-all`}
@@ -263,6 +286,7 @@ export function LeadForm({
               setForm((f) => ({ ...f, contact: e.target.value }));
               setErrors((er) => ({ ...er, contact: "" }));
             }}
+            onFocus={markFormStart}
             className={`w-full bg-white/5 border ${
               errors.contact ? "border-red-500/60" : "border-white/12"
             } rounded-xl px-4 py-3.5 text-white text-sm placeholder-slate-600 outline-none focus:border-violet-500/60 focus:bg-white/8 transition-all`}

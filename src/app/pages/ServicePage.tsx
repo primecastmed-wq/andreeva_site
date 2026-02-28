@@ -50,6 +50,12 @@ export default function ServicePage() {
   const scrollToForm = () => {
     document.getElementById("service-form")?.scrollIntoView({ behavior: "smooth" });
     setSelectedPlan(plan);
+    if (
+      typeof window !== "undefined" &&
+      typeof (window as any).ym === "function"
+    ) {
+      (window as any).ym(106751172, "reachGoal", "service_form_open");
+    }
   };
 
   return (
