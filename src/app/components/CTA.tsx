@@ -2,18 +2,18 @@ import { useState } from "react";
 import { Send, Mail, MessageSquare, Phone, Clock } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 import { Card } from "./ui/card";
 
 export function CTA() {
   const [formData, setFormData] = useState({
     name: "",
-    contact: "",
+    email: "",
+    phone: "",
+    message: "",
   });
-  const [checklistContact, setChecklistContact] = useState("");
   const [status, setStatus] = useState("");
-  const [checklistStatus, setChecklistStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isChecklistSubmitting, setIsChecklistSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,8 +24,9 @@ export function CTA() {
 <b>🚀 НОВАЯ ЗАЯВКА С САЙТА</b>
 
 <b>👤 Имя:</b> ${formData.name}
-<b>📲 Контакт (телефон/Telegram):</b> <code>${formData.contact}</code>
-<b>🎯 Источник:</b> Бесплатная 30-минутная консультация
+<b>📧 Email:</b> <code>${formData.email}</code>
+<b>📱 Телефон:</b> <code>${formData.phone}</code>
+<b>💬 Сообщение:</b> ${formData.message || "Не указано"}
     `.trim();
 
     try {
@@ -44,7 +45,7 @@ export function CTA() {
           ? `Заявка отправлена (ID: ${data.message_id}).`
           : "Заявка отправлена."
       );
-      setFormData({ name: "", contact: "" });
+      setFormData({ name: "", email: "", phone: "", message: "" });
       if (
         typeof window !== "undefined" &&
         typeof (window as any).ym === "function"
@@ -58,48 +59,8 @@ export function CTA() {
     }
   };
 
-  const handleChecklistSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!checklistContact.trim()) return;
-
-    setIsChecklistSubmitting(true);
-    setChecklistStatus("Отправка...");
-
-    const telegramMessage = `
-<b>📌 ЗАПРОС ЧЕК-ЛИСТА</b>
-
-<b>Контакт:</b> <code>${checklistContact}</code>
-<b>Источник:</b> Чек-лист 27 точек роста
-    `.trim();
-
-    try {
-      const response = await fetch("/api/telegram", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: telegramMessage }),
-      });
-      const data = await response.json();
-      if (!response.ok || !data?.ok) {
-        throw new Error("Telegram send failed");
-      }
-
-      setChecklistStatus("Готово! Я отправлю чек-лист на указанный контакт.");
-      setChecklistContact("");
-      if (
-        typeof window !== "undefined" &&
-        typeof (window as any).ym === "function"
-      ) {
-        (window as any).ym(106751172, "reachGoal", "checklist_request");
-      }
-    } catch {
-      setChecklistStatus("Не удалось отправить запрос. Попробуйте еще раз.");
-    } finally {
-      setIsChecklistSubmitting(false);
-    }
-  };
-
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({
       ...formData,
@@ -113,17 +74,17 @@ export function CTA() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-white">
             <div className="inline-block bg-yellow-400 text-gray-900 px-4 py-2 rounded-full font-semibold mb-6 animate-pulse">
-              ⚡ Места на февраль ограничены — ответ в течение 2 часов
+              ⚡ Только в феврале: бонус-чек-лист в подарок
             </div>
 
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Запишитесь на бесплатную 30-минутную консультацию прямо сейчас
+              Получите бесплатную 30-минутную консультацию
             </h2>
             
             <p className="text-xl text-blue-100 mb-4">
-              Я изучу вашу ситуацию, дам 3-5 быстрых рекомендаций и расскажу, как вырасти на 30-200%
+              На консультации я:
             </p>
-            <ul className="text-blue-100 space-y-3 mb-8 text-base md:text-lg">
+            <ul className="text-blue-100 space-y-3 mb-8 text-lg">
               <li className="flex items-start gap-2">
                 <span className="text-yellow-400 font-bold">✓</span>
                 <span>Изучу вашу текущую ситуацию</span>
@@ -186,46 +147,15 @@ export function CTA() {
 
             <div className="mt-8 p-4 bg-white/10 rounded-lg border-2 border-yellow-400">
               <p className="text-yellow-100 font-semibold">
-                🎁 Чек-лист "27 точек роста для бизнеса" бесплатно при записи на консультацию
+                🎁 При заказе аудита в феврале — чек-лист "27 точек роста для бизнеса" в подарок (стоимость 15 000 ₽)
               </p>
             </div>
           </div>
 
-          <Card className="p-8 shadow-2xl" id="checklist">
-            <h3 className="text-2xl font-bold mb-2">
-              Скачайте чек-лист «27 точек роста» бесплатно
-            </h3>
-            <p className="text-gray-600 mb-4">
-              Без звонков и обязательств — просто укажите email или Telegram
-            </p>
-            <form onSubmit={handleChecklistSubmit} className="space-y-3 mb-6">
-              <div>
-                <Input
-                  type="text"
-                  required
-                  value={checklistContact}
-                  onChange={(e) => setChecklistContact(e.target.value)}
-                  placeholder="Email или @telegram"
-                  className="h-12"
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full bg-gray-900 hover:bg-gray-800"
-                disabled={isChecklistSubmitting}
-              >
-                {isChecklistSubmitting ? "Отправка..." : "Получить чек-лист"}
-              </Button>
-              {checklistStatus && (
-                <p className="text-sm text-blue-700 font-medium">{checklistStatus}</p>
-              )}
-            </form>
-
-            <div className="h-px bg-gray-200 mb-6" />
-
-            <h3 className="text-2xl font-bold mb-2">Бесплатная 30-мин консультация</h3>
+          <Card className="p-8 shadow-2xl">
+            <h3 className="text-2xl font-bold mb-2">Оставить заявку</h3>
             <p className="text-gray-600 mb-6">
-              Минимум полей, чтобы я быстро связалась с вами
+              Заполните форму, и я свяжусь с вами для назначения консультации
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -245,29 +175,57 @@ export function CTA() {
               </div>
 
               <div>
-                <label htmlFor="contact" className="block text-sm font-medium mb-2">
-                  Телефон или Telegram *
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  Email *
                 </label>
                 <Input
-                  id="contact"
-                  name="contact"
-                  type="text"
+                  id="email"
+                  name="email"
+                  type="email"
                   required
-                  value={formData.contact}
+                  value={formData.email}
                   onChange={handleChange}
-                  placeholder="+7... или @username"
+                  placeholder="your@email.com"
                   className="h-12"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                  Телефон *
+                </label>
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+7 (___) ___-__-__"
+                  className="h-12"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  Расскажите о вашем бизнесе
+                </label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Какой у вас бизнес? Какие цели? Что хотите улучшить?"
                 />
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-lg py-6"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-6"
                 disabled={isSubmitting}
               >
-                {isSubmitting
-                  ? "Отправка..."
-                  : "Записаться на бесплатную консультацию"}
+                {isSubmitting ? "Отправка..." : "Получить консультацию бесплатно"}
                 <Send className="ml-2" size={20} />
               </Button>
               {status && <p className="text-sm text-blue-700 font-medium">{status}</p>}
