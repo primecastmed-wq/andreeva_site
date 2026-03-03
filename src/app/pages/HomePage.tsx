@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Reveal, Counter, Countdown, FaqItem } from "../components/shared";
 import { LeadForm } from "../components/LeadForm";
+import { WarmupPrompt } from "../components/WarmupPrompt";
 import { servicesData, type Plan } from "../data/services-data";
 
 
@@ -884,6 +885,8 @@ export default function HomePage() {
       </section>
 
       {/* ── FOOTER ── */}
+      <WarmupPrompt storageScope="home" onPrimaryClick={() => scrollTo("cta")} />
+
       <footer className="bg-[#030508] border-t border-white/6 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-5">

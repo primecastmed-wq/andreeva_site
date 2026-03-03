@@ -127,6 +127,9 @@ export function LeadForm({
       ) {
         (window as any).ym(106751172, "reachGoal", "lead_form_submit");
       }
+      if (typeof window !== "undefined") {
+        localStorage.setItem("lead_submitted", "1");
+      }
 
       setLoading(false);
       setSubmitted(true);
