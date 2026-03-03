@@ -23,10 +23,20 @@ export function LeadForm({
   const contactValue = form.contact.trim();
   const nameValue = form.name.trim();
 
+  const normalizeTelegramContact = (value: string) => {
+    const cleaned = value.trim();
+    const fromUrl = cleaned.match(
+      /^(?:https?:\/\/)?(?:t\.me|telegram\.me)\/([a-zA-Z0-9_]{3,})\/?$/i
+    );
+    if (fromUrl?.[1]) return `@${fromUrl[1]}`;
+    return `@${cleaned.replace(/^@+/, "").replace(/\s+/g, "")}`;
+  };
+
   const isContactValid = (value: string, type: "phone" | "tg") => {
     if (!value) return false;
     if (type === "phone") return /^[\d\s\+\-\(\)]{7,}$/.test(value);
-    return /^@?[a-zA-Z0-9_]{3,}$/.test(value);
+    const username = normalizeTelegramContact(value).replace(/^@/, "");
+    return /^[a-zA-Z0-9_]{3,}$/.test(username);
   };
 
   const markFormStart = () => {
@@ -46,7 +56,9 @@ export function LeadForm({
 
     const timeoutId = window.setTimeout(async () => {
       const normalizedContact =
-        contactType === "tg" ? `@${contactValue.replace(/^@/, "")}` : contactValue;
+        contactType === "tg"
+          ? normalizeTelegramContact(contactValue)
+          : contactValue;
 
       const draftMessage = `
 <b>🟡 ЧЕРНОВИК ЗАЯВКИ (не отправлена)</b>
@@ -105,7 +117,9 @@ export function LeadForm({
     setLoading(true);
 
     const normalizedContact =
-      contactType === "tg" ? `@${form.contact.replace(/^@/, "")}` : form.contact;
+      contactType === "tg"
+        ? normalizeTelegramContact(form.contact)
+        : form.contact;
 
     const telegramMessage = `
 <b>🚀 НОВАЯ ЗАЯВКА С САЙТА</b>
