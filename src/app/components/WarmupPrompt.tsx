@@ -12,6 +12,7 @@ export function WarmupPrompt({
   const [visible, setVisible] = useState(false);
   const [interactions, setInteractions] = useState(0);
   const [secondsOnPage, setSecondsOnPage] = useState(0);
+  const [maxScrollPercent, setMaxScrollPercent] = useState(0);
 
   const isSuppressed = useMemo(() => {
     if (typeof window === "undefined") return true;
@@ -31,34 +32,57 @@ export function WarmupPrompt({
     const registerInteraction = () => {
       setInteractions((prev) => prev + 1);
     };
+    const registerScrollDepth = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight <= 0) return;
+      const percent = Math.min(100, Math.round((scrollTop / docHeight) * 100));
+      setMaxScrollPercent((prev) => Math.max(prev, percent));
+    };
 
     const events: Array<keyof WindowEventMap> = [
       "click",
-      "scroll",
       "touchstart",
       "keydown",
     ];
     events.forEach((eventName) =>
       window.addEventListener(eventName, registerInteraction, { passive: true })
     );
+    window.addEventListener("scroll", registerScrollDepth, { passive: true });
 
     return () => {
       window.clearInterval(interval);
       events.forEach((eventName) =>
         window.removeEventListener(eventName, registerInteraction)
       );
+      window.removeEventListener("scroll", registerScrollDepth);
     };
   }, [isSuppressed]);
 
   useEffect(() => {
     if (isSuppressed || visible) return;
-    if (secondsOnPage >= 45 && interactions >= 8) {
+    const fastTrigger = secondsOnPage >= 12 && interactions >= 2;
+    const scrollTrigger = maxScrollPercent >= 35;
+    const mobileIdleTrigger =
+      typeof window !== "undefined" &&
+      window.innerWidth <= 768 &&
+      secondsOnPage >= 8 &&
+      interactions >= 1;
+
+    if (fastTrigger || scrollTrigger || mobileIdleTrigger) {
       setVisible(true);
       if (typeof (window as any).ym === "function") {
         (window as any).ym(106751172, "reachGoal", "warmup_prompt_show");
       }
     }
-  }, [isSuppressed, visible, secondsOnPage, interactions]);
+  }, [
+    isSuppressed,
+    visible,
+    secondsOnPage,
+    interactions,
+    maxScrollPercent,
+  ]);
 
   const closePrompt = () => {
     if (typeof window !== "undefined") {
@@ -144,4 +168,3 @@ export function WarmupPrompt({
     </AnimatePresence>
   );
 }
-
