@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   CheckCircle2, AlertCircle, MessageCircle, Phone, ArrowRight, X, Zap, CreditCard,
@@ -19,6 +19,7 @@ export function LeadForm({
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [formStarted, setFormStarted] = useState(false);
+  const [draftSent, setDraftSent] = useState(false);
 
   const markFormStart = () => {
     if (formStarted) return;
@@ -30,6 +31,50 @@ export function LeadForm({
       (window as any).ym(106751172, "reachGoal", "lead_form_start");
     }
   };
+
+  useEffect(() => {
+    if (!formStarted || submitted || loading || draftSent) return;
+    if (!form.name.trim() || !form.contact.trim()) return;
+
+    const timeoutId = window.setTimeout(async () => {
+      const normalizedContact =
+        contactType === "tg" ? `@${form.contact.replace(/^@/, "")}` : form.contact;
+
+      const draftMessage = `
+<b>🟡 ЧЕРНОВИК ЗАЯВКИ (не отправлена)</b>
+
+<b>🎯 Тип заявки:</b> Бесплатная консультация
+<b>👤 Имя:</b> ${form.name}
+<b>📲 Контакт:</b> <code>${normalizedContact}</code>
+<b>📌 Канал:</b> ${contactType === "tg" ? "Telegram" : "Телефон"}
+<b>🧾 Тариф:</b> ${plan ? plan.title : "Не выбран"}
+<b>📍 Страница:</b> ${typeof window !== "undefined" ? window.location.href : "N/A"}
+      `.trim();
+
+      try {
+        const response = await fetch("/api/telegram", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: draftMessage }),
+        });
+        const data = await response.json();
+        if (!response.ok || !data?.ok) {
+          throw new Error("Draft send failed");
+        }
+        setDraftSent(true);
+        if (
+          typeof window !== "undefined" &&
+          typeof (window as any).ym === "function"
+        ) {
+          (window as any).ym(106751172, "reachGoal", "lead_form_draft");
+        }
+      } catch {
+        // Keep silent for users; this is auxiliary tracking.
+      }
+    }, 15000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [formStarted, submitted, loading, draftSent, form.name, form.contact, contactType, plan]);
 
   const validate = () => {
     const e = { name: "", contact: "" };
