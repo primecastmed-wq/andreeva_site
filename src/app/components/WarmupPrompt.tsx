@@ -62,13 +62,12 @@ export function WarmupPrompt({
 
   useEffect(() => {
     if (isSuppressed || visible) return;
-    const fastTrigger = secondsOnPage >= 12 && interactions >= 2;
-    const scrollTrigger = maxScrollPercent >= 35;
+    const fastTrigger = secondsOnPage >= 6 && interactions >= 1;
+    const scrollTrigger = maxScrollPercent >= 20;
     const mobileIdleTrigger =
       typeof window !== "undefined" &&
       window.innerWidth <= 768 &&
-      secondsOnPage >= 8 &&
-      interactions >= 1;
+      secondsOnPage >= 4;
 
     if (fastTrigger || scrollTrigger || mobileIdleTrigger) {
       setVisible(true);
