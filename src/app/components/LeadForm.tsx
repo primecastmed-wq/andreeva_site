@@ -20,6 +20,14 @@ export function LeadForm({
   const [submitError, setSubmitError] = useState("");
   const [formStarted, setFormStarted] = useState(false);
   const [draftSent, setDraftSent] = useState(false);
+  const contactValue = form.contact.trim();
+  const nameValue = form.name.trim();
+
+  const isContactValid = (value: string, type: "phone" | "tg") => {
+    if (!value) return false;
+    if (type === "phone") return /^[\d\s\+\-\(\)]{7,}$/.test(value);
+    return /^@?[a-zA-Z0-9_]{3,}$/.test(value);
+  };
 
   const markFormStart = () => {
     if (formStarted) return;
@@ -34,17 +42,17 @@ export function LeadForm({
 
   useEffect(() => {
     if (!formStarted || submitted || loading || draftSent) return;
-    if (!form.name.trim() || !form.contact.trim()) return;
+    if (!isContactValid(contactValue, contactType)) return;
 
     const timeoutId = window.setTimeout(async () => {
       const normalizedContact =
-        contactType === "tg" ? `@${form.contact.replace(/^@/, "")}` : form.contact;
+        contactType === "tg" ? `@${contactValue.replace(/^@/, "")}` : contactValue;
 
       const draftMessage = `
 <b>🟡 ЧЕРНОВИК ЗАЯВКИ (не отправлена)</b>
 
 <b>🎯 Тип заявки:</b> Бесплатная консультация
-<b>👤 Имя:</b> ${form.name}
+<b>👤 Имя:</b> ${nameValue || "Не указано"}
 <b>📲 Контакт:</b> <code>${normalizedContact}</code>
 <b>📌 Канал:</b> ${contactType === "tg" ? "Telegram" : "Телефон"}
 <b>🧾 Тариф:</b> ${plan ? plan.title : "Не выбран"}
@@ -67,14 +75,15 @@ export function LeadForm({
           typeof (window as any).ym === "function"
         ) {
           (window as any).ym(106751172, "reachGoal", "lead_form_draft");
+          (window as any).ym(106751172, "reachGoal", "lead_contact_captured");
         }
       } catch {
         // Keep silent for users; this is auxiliary tracking.
       }
-    }, 15000);
+    }, 600);
 
     return () => window.clearTimeout(timeoutId);
-  }, [formStarted, submitted, loading, draftSent, form.name, form.contact, contactType, plan]);
+  }, [formStarted, submitted, loading, draftSent, contactValue, nameValue, contactType, plan]);
 
   const validate = () => {
     const e = { name: "", contact: "" };
