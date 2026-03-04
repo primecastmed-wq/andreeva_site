@@ -72,7 +72,7 @@ export function WarmupPrompt({
     if (fastTrigger || scrollTrigger || mobileIdleTrigger) {
       setVisible(true);
       if (typeof (window as any).ym === "function") {
-        (window as any).ym(106751172, "reachGoal", "warmup_prompt_show");
+        (window as any).ym(98818512, "reachGoal", "warmup_prompt_show");
       }
     }
   }, [
@@ -87,7 +87,7 @@ export function WarmupPrompt({
     if (typeof window !== "undefined") {
       sessionStorage.setItem(`warmup_dismissed_${storageScope}`, "1");
       if (typeof (window as any).ym === "function") {
-        (window as any).ym(106751172, "reachGoal", "warmup_prompt_close");
+        (window as any).ym(98818512, "reachGoal", "warmup_prompt_close");
       }
     }
     setVisible(false);
@@ -95,7 +95,7 @@ export function WarmupPrompt({
 
   const handlePrimary = () => {
     if (typeof (window as any).ym === "function") {
-      (window as any).ym(106751172, "reachGoal", "warmup_prompt_click");
+      (window as any).ym(98818512, "reachGoal", "warmup_prompt_click");
     }
     onPrimaryClick();
     closePrompt();
@@ -151,7 +151,7 @@ export function WarmupPrompt({
                 rel="noreferrer"
                 onClick={() => {
                   if (typeof (window as any).ym === "function") {
-                    (window as any).ym(106751172, "reachGoal", "warmup_prompt_tg");
+                    (window as any).ym(98818512, "reachGoal", "warmup_prompt_tg");
                   }
                 }}
                 className="border border-white/15 text-slate-200 rounded-xl px-3 py-2.5 text-xs sm:text-sm flex items-center justify-center gap-1.5 hover:bg-white/5 transition-colors"
