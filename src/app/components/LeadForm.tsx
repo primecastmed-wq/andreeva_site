@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   CheckCircle2, AlertCircle, MessageCircle, Phone, ArrowRight, X, Zap, CreditCard,
+  ShieldCheck, Clock,
 } from "lucide-react";
 import type { Plan } from "../data/services-data";
 
@@ -99,7 +100,6 @@ export function LeadForm({
 
   const validate = () => {
     const e = { name: "", contact: "" };
-    if (!form.name.trim()) e.name = "Введите ваше имя";
     if (!form.contact.trim())
       e.contact = contactType === "tg" ? "Введите никнейм Telegram" : "Введите номер телефона";
     else if (contactType === "phone" && !/^[\d\s\+\-\(\)]{7,}$/.test(form.contact))
@@ -107,7 +107,7 @@ export function LeadForm({
     else if (contactType === "tg" && !/^@?[a-zA-Z0-9_]{3,}$/.test(form.contact))
       e.contact = "Введите корректный никнейм (например @username)";
     setErrors(e);
-    return !e.name && !e.contact;
+    return !e.contact;
   };
 
   const handleSubmit = async (ev: React.FormEvent) => {
@@ -255,38 +255,6 @@ export function LeadForm({
         )}
       </AnimatePresence>
 
-      {/* Name */}
-      <div>
-        <label
-          className="block text-slate-300 text-sm mb-1.5"
-          style={{ fontWeight: 500 }}
-        >
-          Ваше имя
-        </label>
-        <input
-          id="lead-name"
-          name="name"
-          type="text"
-          autoComplete="name"
-          placeholder="Например, Алексей"
-          value={form.name}
-          onChange={(e) => {
-            setForm((f) => ({ ...f, name: e.target.value }));
-            setErrors((er) => ({ ...er, name: "" }));
-          }}
-          onFocus={markFormStart}
-          className={`w-full bg-white/5 border ${
-            errors.name ? "border-red-500/60" : "border-white/12"
-          } rounded-xl px-4 py-3.5 text-white text-sm placeholder-slate-600 outline-none focus:border-violet-500/60 focus:bg-white/8 transition-all`}
-        />
-        {errors.name && (
-          <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1">
-            <AlertCircle size={11} />
-            {errors.name}
-          </p>
-        )}
-      </div>
-
       {/* Contact type toggle */}
       <div>
         <label
@@ -394,6 +362,17 @@ export function LeadForm({
           </>
         )}
       </motion.button>
+
+      <div className="flex items-center justify-center gap-4 text-xs text-slate-500">
+        <span className="flex items-center gap-1">
+          <ShieldCheck size={12} className="text-emerald-500/70" />
+          Данные защищены
+        </span>
+        <span className="flex items-center gap-1">
+          <Clock size={12} className="text-violet-400/70" />
+          Ответим за 2 часа
+        </span>
+      </div>
 
       {submitError && (
         <p className="text-center text-red-400 text-xs">{submitError}</p>

@@ -88,6 +88,7 @@ export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+  const [heroModalOpen, setHeroModalOpen] = useState(false);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
@@ -150,7 +151,7 @@ export default function HomePage() {
 
           <div className="flex items-center gap-2">
             <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-              onClick={() => scrollTo("cta")}
+              onClick={() => setHeroModalOpen(true)}
               className="hidden sm:block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-2.5 rounded-xl text-xs shadow-lg shadow-orange-500/25"
               style={{ fontWeight: 600 }}>
               Бесплатная консультация
@@ -169,7 +170,7 @@ export default function HomePage() {
                 {[["pain","Ваша проблема"],["results","Кейсы"],["services","Услуги"],["about","Обо мне"],["qualification","Квалификация"]].map(([id, label]) => (
                   <button key={id} onClick={() => scrollTo(id)} className="block w-full text-left text-slate-300 py-3 text-sm border-b border-white/5 last:border-0">{label}</button>
                 ))}
-                <button onClick={() => scrollTo("cta")}
+                <button onClick={() => { setMobileMenuOpen(false); setHeroModalOpen(true); }}
                   className="mt-3 w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3.5 rounded-xl text-sm"
                   style={{ fontWeight: 600 }}>
                   Бесплатная консультация
@@ -239,7 +240,7 @@ export default function HomePage() {
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
                 className="flex flex-col sm:flex-row gap-3 mb-7">
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-                  onClick={() => scrollTo("cta")}
+                  onClick={() => setHeroModalOpen(true)}
                   className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-4 rounded-2xl text-sm shadow-xl shadow-orange-500/30 flex items-center gap-2 justify-center"
                   style={{ fontWeight: 700 }}>
                   Получить бесплатный разбор
@@ -363,7 +364,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                  onClick={() => scrollTo("cta")}
+                  onClick={() => setHeroModalOpen(true)}
                   className="w-full sm:w-auto sm:self-start bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-xl text-sm shadow-lg shadow-orange-500/25 text-center"
                   style={{ fontWeight: 600 }}>
                   Найти мои точки роста →
@@ -443,7 +444,7 @@ export default function HomePage() {
               </div>
 
               <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-                onClick={() => scrollTo("cta")}
+                onClick={() => setHeroModalOpen(true)}
                 className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-orange-600 text-white px-7 py-4 rounded-2xl text-sm shadow-lg shadow-orange-500/25 flex items-center gap-2 justify-center sm:justify-start"
                 style={{ fontWeight: 700 }}>
                 Записаться на бесплатный разбор <ArrowRight size={15} />
@@ -511,7 +512,7 @@ export default function HomePage() {
                 <p className="text-white text-6xl sm:text-7xl md:text-8xl mb-3" style={{ fontFamily: "Manrope, sans-serif", fontWeight: 900 }}>1 : 12</p>
                 <p className="text-white/70 text-sm max-w-md mx-auto">На каждый рубль, вложенный в аудит, клиенты получают в среднем 12 рублей дополнительной прибыли</p>
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-                  onClick={() => scrollTo("cta")}
+                  onClick={() => setHeroModalOpen(true)}
                   className="mt-6 inline-flex items-center gap-2 bg-white text-violet-700 px-6 py-3 rounded-2xl text-sm shadow-xl"
                   style={{ fontWeight: 700 }}>
                   Начать с бесплатной консультации <ArrowRight size={15} />
@@ -720,7 +721,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                  onClick={() => scrollTo("cta")}
+                  onClick={() => setHeroModalOpen(true)}
                   className="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-4 rounded-2xl text-sm shadow-xl shadow-emerald-500/25 flex items-center gap-2 justify-center"
                   style={{ fontWeight: 700 }}>
                   Начать с гарантией <ArrowRight size={15} />
@@ -798,7 +799,7 @@ export default function HomePage() {
                 <p className="text-slate-400 text-xs sm:text-sm">Обучаюсь каждый год — чтобы предлагать актуальные инструменты, которые работают сегодня</p>
               </div>
               <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-                onClick={() => scrollTo("cta")}
+                onClick={() => setHeroModalOpen(true)}
                 className="w-full sm:w-auto flex-shrink-0 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-5 py-3 rounded-xl text-sm shadow-lg shadow-amber-500/20"
                 style={{ fontWeight: 600 }}>
                 Записаться на консультацию
@@ -884,8 +885,54 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── HERO MODAL ── */}
+      <AnimatePresence>
+        {heroModalOpen && (
+          <motion.div
+            key="hero-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+            style={{ background: "rgba(5,8,16,0.85)", backdropFilter: "blur(8px)" }}
+            onClick={() => setHeroModalOpen(false)}
+          >
+            <motion.div
+              key="hero-modal-content"
+              initial={{ opacity: 0, scale: 0.94, y: 24 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 24 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-full max-w-md bg-[#0d1120] border border-white/10 rounded-3xl p-6 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center gap-2 mb-5 bg-gradient-to-r from-orange-500/15 to-orange-600/10 border border-orange-500/25 rounded-2xl px-4 py-2.5">
+                <Gift size={16} className="text-orange-400 flex-shrink-0" />
+                <p className="text-orange-300 text-xs" style={{ fontWeight: 600 }}>
+                  Чек-лист «27 точек роста» — бесплатно при записи
+                </p>
+              </div>
+              <button
+                onClick={() => setHeroModalOpen(false)}
+                className="absolute top-4 right-4 text-slate-500 hover:text-slate-300 transition-colors p-1"
+              >
+                <X size={18} />
+              </button>
+              <h3 className="text-white text-lg mb-1" style={{ fontFamily: "Manrope, sans-serif", fontWeight: 800 }}>
+                Бесплатная консультация
+              </h3>
+              <p className="text-slate-400 text-sm mb-5">
+                Разберём вашу ситуацию и найдём точки роста
+              </p>
+              <LeadForm />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ── FOOTER ── */}
-      <WarmupPrompt storageScope="home" onPrimaryClick={() => scrollTo("cta")} />
+      <WarmupPrompt storageScope="home" onPrimaryClick={() => setHeroModalOpen(true)} />
 
       <footer className="bg-[#030508] border-t border-white/6 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
