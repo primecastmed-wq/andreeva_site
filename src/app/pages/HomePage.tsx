@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import heroPhoto from "../../assets/51cbb1273d953eb3ff4ccb0ce093be35565abacf.png";
-import aboutPhoto from "../../assets/7620348f9abd2f9c406e920c0501688ea6f656ce.png";
+import heroPhoto from "../../assets/51cbb1273d953eb3ff4ccb0ce093be35565abacf.webp";
+import aboutPhoto from "../../assets/7620348f9abd2f9c406e920c0501688ea6f656ce.webp";
 import {
   TrendingUp, Star, CheckCircle2, Award, BarChart3,
   Target, FileText, DollarSign, Users, ArrowRight,
@@ -278,7 +278,7 @@ export default function HomePage() {
               <div className="relative w-[400px]">
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-600/25 to-purple-900/15 rounded-[32px] blur-2xl scale-105" />
                 <div className="relative rounded-[28px] overflow-hidden border border-white/10">
-                  <img src={heroPhoto} alt="Светлана Андреева" className="w-full object-cover aspect-[4/5] object-top" />
+                  <img src={heroPhoto} alt="Светлана Андреева" className="w-full object-cover aspect-[4/5] object-top" fetchPriority="high" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050810]/85 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6">
                     <p className="text-white" style={{ fontFamily: "Manrope, sans-serif", fontWeight: 700 }}>Светлана Андреева</p>
@@ -385,7 +385,7 @@ export default function HomePage() {
               <div className="relative mx-auto max-w-xs sm:max-w-sm lg:max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 to-transparent rounded-3xl blur-3xl" />
                 <div className="relative rounded-3xl overflow-hidden border border-white/10 aspect-[3/4]">
-                  <img src={aboutPhoto} alt="Светлана Андреева" className="w-full h-full object-cover object-center" />
+                  <img src={aboutPhoto} alt="Светлана Андреева" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050810]/80 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <p className="text-white text-sm" style={{ fontFamily: "Manrope, sans-serif", fontWeight: 700 }}>Светлана Андреева</p>

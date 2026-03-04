@@ -9,7 +9,7 @@ import { servicesData } from "../data/services-data";
 import { Reveal, Countdown, FaqItem } from "../components/shared";
 import { LeadForm } from "../components/LeadForm";
 import { WarmupPrompt } from "../components/WarmupPrompt";
-import heroPhoto from "../../assets/51cbb1273d953eb3ff4ccb0ce093be35565abacf.png";
+import heroPhoto from "../../assets/51cbb1273d953eb3ff4ccb0ce093be35565abacf.webp";
 
 const PHOTO = "https://images.unsplash.com/photo-1736939681295-bb2e6759dddc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMG1hcmtldGluZyUyMGNvbnN1bHRhbnQlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NzIyNjAwNDR8MA&ixlib=rb-4.1.0&q=80&w=1080";
 

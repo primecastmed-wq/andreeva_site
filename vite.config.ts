@@ -18,5 +18,19 @@ export default defineConfig({
   },
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
-  assetsInclude: ['**/*.svg', '**/*.csv'],
+  assetsInclude: ['**/*.svg', '**/*.csv', '**/*.webp'],
+
+  build: {
+    rollupOptions: {
+      output: {
+        // Split heavy vendor libs into separate chunks for better caching
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'motion': ['motion'],
+          'router': ['react-router'],
+          'lucide': ['lucide-react'],
+        },
+      },
+    },
+  },
 })
