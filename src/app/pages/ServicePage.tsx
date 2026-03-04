@@ -25,7 +25,7 @@ export default function ServicePage() {
       typeof window !== "undefined" &&
       typeof (window as any).ym === "function"
     ) {
-      (window as any).ym(98818512, "hit", window.location.pathname + window.location.search);
+      (window as any).ym(106751172, "hit", window.location.pathname + window.location.search);
     }
   }, [slug]);
 
@@ -55,7 +55,7 @@ export default function ServicePage() {
       typeof window !== "undefined" &&
       typeof (window as any).ym === "function"
     ) {
-      (window as any).ym(98818512, "reachGoal", "service_form_open");
+      (window as any).ym(106751172, "reachGoal", "service_form_open");
     }
   };
 

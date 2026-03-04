@@ -47,7 +47,7 @@ export function LeadForm({
       typeof window !== "undefined" &&
       typeof (window as any).ym === "function"
     ) {
-      (window as any).ym(98818512, "reachGoal", "lead_form_start");
+      (window as any).ym(106751172, "reachGoal", "lead_form_start");
     }
   };
 
@@ -87,8 +87,8 @@ export function LeadForm({
           typeof window !== "undefined" &&
           typeof (window as any).ym === "function"
         ) {
-          (window as any).ym(98818512, "reachGoal", "lead_form_draft");
-          (window as any).ym(98818512, "reachGoal", "lead_contact_captured");
+          (window as any).ym(106751172, "reachGoal", "lead_form_draft");
+          (window as any).ym(106751172, "reachGoal", "lead_contact_captured");
         }
       } catch {
         // Keep silent for users; this is auxiliary tracking.
@@ -148,7 +148,7 @@ export function LeadForm({
         typeof window !== "undefined" &&
         typeof (window as any).ym === "function"
       ) {
-        (window as any).ym(98818512, "reachGoal", "lead_form_submit");
+        (window as any).ym(106751172, "reachGoal", "lead_form_submit");
       }
       if (typeof window !== "undefined") {
         localStorage.setItem("lead_submitted", "1");
