@@ -146,7 +146,7 @@ export function WarmupPrompt({
                 Записаться
               </button>
               <a
-                href="https://t.me/AndreevaSvetlana_bot"
+                href="https://t.me/she_knows_s"
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => {
